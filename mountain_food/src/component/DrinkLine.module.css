@@ -1,0 +1,24 @@
+.drink{
+    width: 650px;
+    display: flex;
+    width: 70%;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    border-bottom: 2px #404B51 dotted;
+    font-size: 18px;
+    line-height: 1;
+}
+.name{
+    padding-right: 5px;
+    color: #404B51;
+}
+.price{
+    float: right;
+    padding-left: 10px;
+    color: #d0b97d;
+}
+.name, .price{
+    background: white;
+    position: relative;
+    bottom: -7px;
+}

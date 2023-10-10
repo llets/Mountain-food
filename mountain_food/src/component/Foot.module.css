@@ -1,0 +1,56 @@
+*{
+    font-family:  'PT Serif', serif;
+}
+
+.social{
+    display: flex;
+    width: 210px;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;/*разрешен перенос на новую строку*/
+    margin: 10px 0;
+}
+
+.menu{
+    display: flex;
+    width: 480px;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;/*разрешен перенос на новую строку*/
+    margin: 10px 0;
+}
+
+.menu_item{
+    font-size: 2em;/*размер иконок*/
+    color: #444;/*цвет иконок*/
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #d0b97d;
+    width: 100%;/*на всю ширину*/
+    padding: 20px 50px;/*поля для контента*/
+    margin-top: 120px;/*отступ сверху*/
+}
+.menu_item {
+    font-size: 1.2em;/*размер ссылок меню*/
+    color: #444;/*цвет ссылок меню*/
+    opacity: 0.75;/*значение прозрачности*/
+    margin: 0 15px;
+    text-decoration: none;/*ссылка без подчеркивания*/
+    display: inline-block;
+}
+.menu_item:hover     {
+    opacity: 1;
+}
+.author {
+    color: #444;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1.1em;
+}
