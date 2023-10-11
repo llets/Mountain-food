@@ -1,23 +1,31 @@
-import React from 'react'
+import React, {useState} from 'react'
 import classes from './AuthRegCard.module.css'
 import LoginTab from "./loginTab";
 import RegTab from "./regTab";
 
 const AuthRegCard = () => {
+    const handleLoginTab = () => {
+        // update the state to tab1
+        setActiveTab("logTab");
+    };
+    const handleRegTab = () => {
+        // update the state to tab2
+        setActiveTab("regTab");
+    };
+    const [activeTab, setActiveTab] = useState("logTab");
   return (
       <div className={classes.Tabs}>
-          {/* Tab nav */}
           <ul className={classes.nav}>
-              <li>Войти</li>
-              <li>Зарегистрироваться</li>
+              <li className={activeTab === "logTab" ? "active" : ""}
+              onClick={handleLoginTab}>Вход</li>
+              <li className={activeTab === "regTab" ? "active" : ""}
+              onClick={handleRegTab}>Регистрация</li>
           </ul>
           <div className={classes.outlet}>
-              <LoginTab />
-              <RegTab />
+              {activeTab === "logTab" ? <LoginTab /> : <RegTab />}
           </div>
       </div>
   )
-
 }
 
 export default AuthRegCard

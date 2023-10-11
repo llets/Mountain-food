@@ -9,7 +9,7 @@ const CartCard = observer(() => {
     const {cart} = useContext(Context)
     const {meals} = useContext(Context)
     const {user} = useContext(Context)
-    let meals_list = cart._cart.filter((cart_item) => cart_item.id_user == user._user.id)
+    let meals_list = cart._cart.filter((cart_item) => cart_item.id_user === user._user.id)
     meals_list = meals_list.map((item) =>
     {
         let m = (meals._meal_list).filter((mea) => mea.id === item.id_meal)
@@ -57,16 +57,16 @@ const CartCard = observer(() => {
        <div className={classes.column_2}>
             <div className={classes.title}>Оплата</div>
             <div className={classes.payment_info}>
-            <div class={classes.textOnInput}>
-                <label for="inputText">Номер карты</label>
+            <div className={classes.textOnInput}>
+                <label>Номер карты</label>
                 <input 
                     className={classes.card}
                     type='text'
                     placeholder='1234 5678 9012 3456'>
                 </input>
             </div>
-            <div class={classes.textOnInput}>
-                <label for="inputText">Владелец</label>
+            <div className={classes.textOnInput}>
+                <label>Владелец</label>
                 <input 
                     className={classes.owner}
                     type='text'
@@ -74,8 +74,8 @@ const CartCard = observer(() => {
                 </input>
             </div>
                 <div className={classes.card_additional}>
-                    <div class={classes.textOnInput}>
-                        <label for="inputText">Срок</label>
+                    <div className={classes.textOnInput}>
+                        <label>Срок</label>
                         <input
                             className={classes.expiration}
                             type='text'
@@ -84,8 +84,8 @@ const CartCard = observer(() => {
                             placeholder='MM/YYYY'>
                         </input>  
                     </div>
-                    <div class={classes.textOnInput}>
-                        <label for="inputText">CVV</label>
+                    <div className={classes.textOnInput}>
+                        <label>CVV</label>
                         <input
                             className={classes.cvv}
                             type='text'
