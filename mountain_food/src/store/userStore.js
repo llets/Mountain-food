@@ -9,11 +9,11 @@ class UserStore{
         "password": "admin",
         "isAdmin": true
     }
-    _isAuth = false
-    _isAdmin = false
+    _isAuth = true
+    _isAdmin = true
 
     constructor(){
-        // this._isAuth = false
+        // this._isAuth = true
         // this._user = {}
         // this._isAdmin = false
         makeAutoObservable(this)

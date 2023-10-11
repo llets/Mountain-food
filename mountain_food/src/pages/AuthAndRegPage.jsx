@@ -7,9 +7,11 @@ const AuthAndRegPage = () => {
   const {user} = useContext(Context)
   const navigate = useNavigate()
   return (
-    <>
+      <div style={{
+        overflow: 'auto'
+      }}>
       <AuthRegCard/>
-    </>
+    </div>
   );
 }
 

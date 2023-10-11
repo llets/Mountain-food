@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import classes from './AuthRegCard.module.css'
-import LoginTab from "./loginTab";
-import RegTab from "./regTab";
+import LoginTab from "./tabs/loginTab";
+import RegTab from "./tabs/regTab";
 
 const AuthRegCard = () => {
     const handleLoginTab = () => {

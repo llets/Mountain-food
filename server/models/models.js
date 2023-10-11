@@ -18,24 +18,14 @@ const CartItem = sequelize.define('cart_item', {
     amount: {type: DataTypes.INTEGER, allowNull: false}
 })
 
-const Meal = sequelize.define('meal', {
+const Food = sequelize.define('food', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     category: {type: DataTypes.STRING, allowNull: false},
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
     photo: {type: DataTypes.STRING, unique: true, allowNull: false},
-    description: {type: DataTypes.STRING, unique: true, allowNull: false},
-    // price: {type: DataTypes.STRING},
+    description: {type: DataTypes.STRING},
     price: {type: DataTypes.INTEGER, allowNull: false},
     additional: {type: DataTypes.STRING}
-    // additional: {type: DataTypes.STRING, allowNull: false}
-})
-
-const Drink = sequelize.define('drink', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    category: {type: DataTypes.STRING, allowNull: false},
-    name: {type: DataTypes.STRING, unique: true, allowNull: false},
-    // price: {type: DataTypes.STRING},
-    price: {type: DataTypes.INTEGER, allowNull: false}
 })
 
 User.hasOne(Cart)
@@ -44,16 +34,12 @@ Cart.belongsTo(User)
 Cart.hasMany(CartItem)
 CartItem.belongsTo(Cart)
 
-Meal.hasMany(CartItem)
-CartItem.belongsTo(Meal)
-
-// Drink.hasMany(CartItem)
-// CartItem.belongsTo(Drink)
+Food.hasMany(CartItem)
+CartItem.belongsTo(Food)
 
 module.exports = {
     User,
-    Meal,
-    Drink,
+    Food,
     Cart,
     CartItem
 }

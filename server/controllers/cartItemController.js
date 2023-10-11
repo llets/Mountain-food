@@ -1,10 +1,14 @@
 const {CartItem} = require('../models/models')
 const ApiError = require('../error/ApiError')
 class CartItemController{
-    async create(req, res){
-        const {id_cart} = req.body
-        const cartItem = await CartItem.create({id_cart})
-        return res.json({cartItem})
+    async create(req, res, next){
+        try {
+            const {cartId, foodId, amount} = req.body
+            const cartItem = await CartItem.create({cartId, foodId, amount})
+            return res.json({cartItem})
+        } catch(e){
+            next(ApiError.badRequest((e.message)))
+        }
     }
     async getAll(req, res){
         const items = await CartItem.findAll()
@@ -15,8 +19,32 @@ class CartItemController{
         const cartItem = await CartItem.findOne({ where: {id} })
         return res.json(cartItem)
     }
-    async deleteOne(req, res){
-
+    async deleteOne(req, res, next){
+        try{
+            const {id} = req.body
+        } catch(e){
+            next(ApiError.badRequest((e.message)))
+        }
+    }
+    async changeAmount(req, res, next){
+        try{
+            const {id, type} = req.body
+            const cartItem = await CartItem.findOne({ where: {id} })
+            if (type === "decrease"){
+                if (cartItem.amount === 1){
+                    await cartItem.destroy();
+                    return res.json({message: "OK"})
+                } else {
+                    const decrementResult = await cartItem.decrement('amount', {by: 1});
+                    return res.json(decrementResult)
+                }
+            }else {
+                const incrementResult = await cartItem.increment('amount', { by: 1 });
+                return res.json(incrementResult)
+            }
+        } catch(e){
+            next(ApiError.badRequest((e.message)))
+        }
     }
 }
 

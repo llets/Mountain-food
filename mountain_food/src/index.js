@@ -5,8 +5,7 @@ import App from './App'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import UserStore from './store/userStore';
 import CartStore from './store/cartStore';
-import MealStore from './store/mealStore';
-import DrinkStore from './store/drinkStore';
+import FoodStore from './store/foodStore';
 
 export const Context = createContext(null)
 
@@ -15,9 +14,8 @@ root.render(
 <Context.Provider value={{
     user: new UserStore(),
     cart: new CartStore(),
-    meals: new MealStore(),
-    drinks: new DrinkStore()
-}}>
+    food: new FoodStore()
+    }}>
 <App />
 </Context.Provider>
 )

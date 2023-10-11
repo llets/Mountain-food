@@ -1,12 +1,27 @@
-import React from 'react';
-import {Switch, Route, Redirect, BrowserRouter} from 'react-router-dom'
+import React, {useContext} from 'react';
+import {Routes, Route} from 'react-router-dom'
+import {adminRoutes, authRoutes, publicRoutes} from "../routes";
+import IndexPage from "../pages/IndexPage";
+import {Context} from "../index";
+import {observer} from "mobx-react-lite";
 
-const AppRouter = () => {
+const AppRouter = observer(() => {
+  const {user} = useContext(Context)
+  console.log(user)
   return (
-    <BrowserRouter>
-      
-    </BrowserRouter>
+      <Routes>
+            {user.isAuth && authRoutes.map((a) =>
+              <Route key={a.path} path = {a.path} element={a.element} exact/>
+            )}
+            {user.isAdmin && adminRoutes.map((a) =>
+                <Route key={a.path} path = {a.path} element={a.element} exact/>
+            )}
+            {publicRoutes.map((a) =>
+                    <Route key={a.path} path = {a.path} element={a.element} exact/>
+                )}
+        <Route path="*" element={<IndexPage/>} />
+        </Routes>
   )
-}
+})
 
 export default AppRouter

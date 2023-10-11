@@ -12,15 +12,15 @@ const MealCard = observer(({id_meal, title, img, price, description, addit, cate
       <div className={classes.post_top}>
         <Card.Img src={img} className={classes.post_top_img}/>
         {addit && <p className={classes.post_top_angle}>{addit}</p>}
-        <div className={classes.post_top_price}><span>{price}</span></div>
+        <div className={classes.post_top_price}><span>{price  + " ₽"}</span></div>
       </div>
       {/* изменение высоты поля для описания в зависисмости от категории */}
-      {categ=='main meals' &&
+      {categ==='main meals' &&
       <div className={classes.post_content} style={{height:'270px'}}>
         <h3>{title}</h3>
         <p>{description}</p>
       </div>}
-      {categ!='main meals' &&
+      {categ!=='main meals' &&
       <div className={classes.post_content}>
         <h3>{title}</h3>
         <p>{description}</p>

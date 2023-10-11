@@ -10,20 +10,25 @@ const generateJwt = (id, email, role) => {
 }
 
 class UserController{
-    async registration(req, res){
-        const {email, password, role, username} = req.body
-        if (!email || !password){
-            return next(ApiError.badRequest("Некорректный email или пароль"))
+    async registration(req, res, next){
+        try{
+            const {email, password, role, username} = req.body
+            if (!email || !password){
+                return next(ApiError.badRequest("Некорректный email или пароль"))
+            }
+            const candidate = await User.findOne({where: {email}})
+            if (candidate){
+                return next(ApiError.badRequest("Пользователь с таким email уже существует"))
+            }
+            const hashPassword = await bcrypt.hash(password, 5)
+            const user = await User.create({username, email, role, password: hashPassword})
+            const cart = await Cart.create({userId: user.id})
+            const token = generateJwt(user.id, user.email, user.role)
+            return res.json(token)
+        } catch (e){
+            next(ApiError.badRequest((e.message)))
         }
-        const candidate = await User.findOne({where: {email}})
-        if (candidate){
-            return next(ApiError.badRequest("Пользователь с таким email уже существует"))
-        }
-        const hashPassword = await bcrypt.hash(password, 5)
-        const user = await User.create({username, email, role, password: hashPassword})
-        const cart = await Cart.create({userId: user.id})
-        const token = generateJwt(user.id, user.email, user.role)
-        return res.json(token)
+
     }
     async login(req, res, next){
         const {email, password} = req.body
@@ -43,7 +48,6 @@ class UserController{
         const token = generateJwt(req.user.id, req.user.email, req.user.role)
         return res.json({token})
     }
-
 }
 
 module.exports = new UserController()

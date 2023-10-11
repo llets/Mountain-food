@@ -2,9 +2,13 @@ const {Cart} = require('../models/models')
 const ApiError = require('../error/ApiError')
 class CartController{
     async create(req, res){
-        const {userId} = req.body
-        const cart = await Cart.create({userId})
-        return res.json({cart})
+        try{
+            const {userId} = req.body
+            const cart = await Cart.create({userId})
+            return res.json({cart})
+        } catch(e) {
+            next(ApiError.badRequest((e.message)))
+        }
     }
     async getOne(req, res){
         const {id} = req.params

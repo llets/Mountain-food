@@ -1,21 +1,11 @@
 import React from "react";
-import classes from './RegLogTab.module.css'
+import classes from '../RegLogTab.module.css'
 import {Button} from "react-bootstrap";
-const RegTab = () => {
+const LoginTab = () => {
     return (
         <div className={classes.wrapper}>
             <div className={classes.textOnInput}>
-                <label htmlFor="inputText">Имя</label>
-                <input
-                    className={classes.email}
-                    type='text'
-                    minLength='5'
-                    maxLength='40'
-                    placeholder='Юлий'>
-                </input>
-            </div>
-            <div className={classes.textOnInput}>
-                <label htmlFor="inputText">Email</label>
+                <label>Email</label>
                 <input
                     className={classes.email}
                     type='text'
@@ -25,7 +15,7 @@ const RegTab = () => {
                 </input>
             </div>
             <div className={classes.textOnInput}>
-                <label htmlFor="inputText">Пароль</label>
+                <label>Пароль</label>
                 <input
                     className={classes.password}
                     type='text'
@@ -34,8 +24,8 @@ const RegTab = () => {
                     placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
                 </input>
             </div>
-            <Button className={classes.register}>Зарегистрироваться</Button>
+            <Button className={classes.enter}>Войти</Button>
         </div>
     );
 };
-export default RegTab;
+export default LoginTab;

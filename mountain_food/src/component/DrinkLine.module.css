@@ -1,7 +1,6 @@
 .drink{
     width: 650px;
     display: flex;
-    width: 70%;
     justify-content: space-between;
     margin-bottom: 15px;
     border-bottom: 2px #404B51 dotted;
@@ -21,4 +20,30 @@
     background: white;
     position: relative;
     bottom: -7px;
+}
+.counter_wrap {
+    float: right;
+    margin: 0 25px;
+}
+.counter_wrap Button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+    width: 2em;
+    height: 2em;
+    border: 1px solid #d0b97d;
+    border-radius: 7px;
+    color: #d0b97d;
+    background-color: #fff;
+}
+.counter_wrap Button:hover {
+    color: #fff;
+    background-color: #c4890a;
+}
+.counter_wrap Button:disabled {
+    opacity: 0.5;
+    color: #8e3a16;
+    background-color: #fff;
+    cursor: default;
 }

@@ -1,5 +1,4 @@
-export const ADMIN_ROUTE = '/admin'
-export const HOME_ROUTE = '/main'
+export const HOME_ROUTE = '/'
 export const AUTH_REG_ROUTE = '/authreg'
 export const ADMIN_PANEL_ROUTE = '/admin_panel'
 export const HINKALI_ROUTE = '/hinkali'

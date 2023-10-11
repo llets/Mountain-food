@@ -7,20 +7,20 @@ import {observer} from 'mobx-react-lite'
 
 const CartCard = observer(() => {
     const {cart} = useContext(Context)
-    const {meals} = useContext(Context)
+    const {food} = useContext(Context)
     const {user} = useContext(Context)
-    let meals_list = cart._cart.filter((cart_item) => cart_item.id_user === user._user.id)
-    meals_list = meals_list.map((item) =>
+    let food_list = cart._cart.filter((cart_item) => cart_item.id_user === user._user.id)
+    food_list = food_list.map((item) =>
     {
-        let m = (meals._meal_list).filter((mea) => mea.id === item.id_meal)
+        let m = (food._food_list).filter((food) => food.id === item.id_meal)
           item.name = (m[0]).name
           item.photo = (m[0]).photo
           item.price = (m[0]).price
           return item
     })
     let total_price = 0
-    meals_list.map((meal) => {
-        total_price += meal.price.split(' ')[0] * meal.amount
+    food_list.map((food) => {
+        total_price += food.price * food.amount
     })
 
     const increaseAmount = (id_m) => {
@@ -37,14 +37,14 @@ const CartCard = observer(() => {
        <div className={classes.column_1}>
             <div className={classes.title}>Блюда</div>
             <div className={classes.meal_list}>
-                {meals_list.map((meal) => {
+                {food_list.map((food) => {
                     return <CartItem 
-                    key={meal.id}
-                    id={meal.id} 
-                    name={meal.name} 
-                    photo={meal.photo} 
-                    price={meal.price} 
-                    amount={meal.amount}
+                    key={food.id}
+                    id={food.id}
+                    name={food.name}
+                    photo={food.photo}
+                    price={food.price}
+                    amount={food.amount}
                     increaseAmount={increaseAmount} decreaseAmount={decreaseAmount} deleteMeal={deleteMeal}/>}
                 )}
             </div>

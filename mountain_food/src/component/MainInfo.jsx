@@ -7,9 +7,6 @@ const MainInfo = () => {
 const mapState = {  center: [54.7250628841006,55.94095232813801], zoom: 16 };
   return (
     <>
-        <div className={classes.runningWrap}>
-            <div className={classes.runningLine}>Уважаемые гости! Временно нет доставки напитков</div>
-        </div>
         <div className={classes.contentWrap}>
             <div className={classes.about}>
                 <div className={classes.text}>

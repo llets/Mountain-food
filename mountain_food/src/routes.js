@@ -1,39 +1,59 @@
-import { ADMIN_ROUTE, AUTH_REG_ROUTE, CART_ROUTE, DRINKS_ROUTE, HACHAPURI_ROUTE, HINKALI_ROUTE, HOME_ROUTE, MAIN_MEALS_ROUTE } from "./utils/consts"
+import {
+    ADMIN_PANEL_ROUTE,
+    AUTH_REG_ROUTE,
+    CART_ROUTE,
+    DRINKS_ROUTE,
+    HACHAPURI_ROUTE,
+    HINKALI_ROUTE,
+    HOME_ROUTE,
+    MAIN_MEALS_ROUTE
+} from "./utils/consts"
+import AdminPanelPage from "./pages/AdminPanelPage";
+import CartPage from "./pages/CartPage";
+import IndexPage from "./pages/IndexPage";
+import AuthAndRegPage from "./pages/AuthAndRegPage";
+import HinkaliPage from "./pages/HinkaliPage";
+import HachapuriPage from "./pages/HachapuriPage";
+import MainMealsPage from "./pages/MainMealsPage";
+import DrinksPage from "./pages/DrinksPage";
+
+export const adminRoutes = [
+    {
+        path: ADMIN_PANEL_ROUTE,
+        element: <AdminPanelPage/>
+    }
+]
 
 export const authRoutes = [
     {
-        path: ADMIN_ROUTE,
-        Component: Admin
-    },
-    {
-        path: CART_ROUTE,   
-        Component: Cart
+        path: CART_ROUTE,
+        element: <CartPage/>
     }
 ]
 
 export const publicRoutes = [
     {
         path: HOME_ROUTE,
-        Component: Admin
+        element: <IndexPage/>
     },
     {
-        path: AUTH_REG_ROUTE,   
-        Component: Cart
+        path: AUTH_REG_ROUTE,
+        element: <AuthAndRegPage/>
     },
     {
         path: HINKALI_ROUTE,
-        Component: Admin
+        element: <HinkaliPage/>
     },
     {
-        path: HACHAPURI_ROUTE,   
-        Component: Cart
+        path: HACHAPURI_ROUTE,
+        element: <HachapuriPage/>
     },
     {
         path: MAIN_MEALS_ROUTE,
-        Component: Admin
+        element: <MainMealsPage/>
     },
     {
-        path: DRINKS_ROUTE,   
-        Component: Cart
-    },
+        path: DRINKS_ROUTE,
+        element: <DrinksPage/>
+    }
 ]
