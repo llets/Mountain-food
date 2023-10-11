@@ -9,10 +9,10 @@ const CartCard = observer(() => {
     const {cart} = useContext(Context)
     const {food} = useContext(Context)
     const {user} = useContext(Context)
-    let food_list = cart._cart.filter((cart_item) => cart_item.id_user === user._user.id)
+    let food_list = cart._cart.filter((cart_item) => cart_item.id_user === user.userId)
     food_list = food_list.map((item) =>
     {
-        let m = (food._food_list).filter((food) => food.id === item.id_meal)
+        let m = (food._food_list).filter((food) => food.id === item.id_food)
           item.name = (m[0]).name
           item.photo = (m[0]).photo
           item.price = (m[0]).price

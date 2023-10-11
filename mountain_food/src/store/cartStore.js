@@ -69,6 +69,10 @@ class CartStore{
     get Cart(){
         return this._cart
     }
+
+    get userId(){
+        return this._cart.id_user
+    }
 }
 
 export default CartStore

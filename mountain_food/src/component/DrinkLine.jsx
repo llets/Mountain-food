@@ -10,7 +10,7 @@ const DrinkLine = observer(({id_drink, name, price, onAdd}) => {
       }}>
           <div className={classes.drink}>
               <div className={classes.name}>{name}</div>
-              <div className={classes.price}>{price}</div>
+              <div className={classes.price}>{price + " ₽"}</div>
           </div>
           <div className={classes.counter_wrap}>
               <Button id={id_drink}
