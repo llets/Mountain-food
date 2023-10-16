@@ -1,7 +1,8 @@
 import {$authHost, $host} from "./index";
 
-export const createFood = async (food) => {
-    const {data} = await $authHost.post('api/food', {food})
+export const createFood = async (foodData) => {
+    console.log(foodData)
+    const {data} = await $authHost.post('api/food', {foodData})
     return data
 }
 export const fetchFood = async () => {

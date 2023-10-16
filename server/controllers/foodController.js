@@ -3,7 +3,9 @@ const ApiError = require('../error/ApiError')
 class FoodController {
     async create(req, res, next){
         try {
-            const {category, name, photo, description, price, additional} = req.body
+            // console.log(req.body)
+            const {category, name, photo, description, price, additional} = req.body.foodData
+            console.log(category, name, photo, description, price, additional)
             // const {category, name, photo, description, price, additional} = req.body.foodData
             if (!name || !photo || !price) {
                 return next(ApiError.badRequest("Поля \"название\", \"цена\" \"ссылка на фото\" являются обязательными"))

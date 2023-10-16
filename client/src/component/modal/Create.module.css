@@ -1,6 +1,6 @@
 .name, .price, .photo, .description, .additional{
     height: 40px;
-    width: 300px;
+    width: 220px !important;
     border-radius: 6px;
     border: 1px solid #b99d61;
     font-family: 'Roboto', sans-serif !important;
@@ -13,6 +13,13 @@
 .photo::placeholder, .description::placeholder, .additional::placeholder{
     color: #b99d61;
 }
-.password:focus, .email:focus{
-    outline: 1px solid #d0b97d;
+.type{
+    background: #b99d61 !important;
+    width: 220px !important;
+    margin-bottom: 8px;
+    border: none !important;
+    outline: none !important;
+}
+.type:hover, .type:focus, .type:active{
+    background: #b99d61 !important;
 }

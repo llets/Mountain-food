@@ -21,7 +21,7 @@ const CreateHinkali = ({show, onHide}) => {
         form.append('additional', `${additional}`)
         try {
             const foodData = Object.fromEntries(form)
-            let dat = await createFood({foodData})
+            let dat = await createFood(foodData)
             setName('')
             setPrice(400)
             setPhoto('')
