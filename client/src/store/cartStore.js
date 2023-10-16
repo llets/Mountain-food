@@ -20,19 +20,22 @@ class CartStore{
     }
 
     increaseAmountOfProduct(id){
-        for (let item in this._cart){
-            if (item.id === id){
-                item.amount +=1
+        for (let i = 0; i < this._cart.length; i++){
+            if (this._cart[i].id === id){
+                this._cart[i].amount +=1
+                this._total += this._cart[i].food.price
                 break
             }
         }
     }
 
     decreaseAmountOfProduct(id){
-        for (let item in this._cart){
-            if (item.id === id){
-                item.amount -=1
-                if (item.amount === 0){
+        for (let i = 0; i < this._cart.length; i++){
+            if (this._cart[i].id === id){
+                if (this._cart[i].amount !== 1) {
+                    this._cart[i].amount -= 1
+                    this._total -= this._cart[i].food.price
+                } else{
                     this.deleteCartProduct(id)
                 }
                 break
