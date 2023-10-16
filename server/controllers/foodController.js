@@ -4,8 +4,13 @@ class FoodController {
     async create(req, res, next){
         try {
             const {category, name, photo, description, price, additional} = req.body
-            const food = await Food.create({category, name, photo, description, price, additional})
-            return res.json({food})
+            // const {category, name, photo, description, price, additional} = req.body.foodData
+            if (!name || !photo || !price) {
+                return next(ApiError.badRequest("Поля \"название\", \"цена\" \"ссылка на фото\" являются обязательными"))
+            }
+            const food = await Food.create(
+                {category, name, photo, description, price, additional})
+            return res.json(food)
         }
         catch(e){
             next(ApiError.badRequest((e.message)))
@@ -29,7 +34,13 @@ class FoodController {
     async deleteOne(req, res, next){
         const {id} = req.params
         try{
-
+            await Food.destroy({
+                where: {
+                    id: id
+                }
+            });
+            const foods = await Food.findAll()
+            return res.json(foods)
         } catch(e){
             next(ApiError.badRequest((e.message)))
         }

@@ -1,0 +1,18 @@
+.name, .price, .photo, .description, .additional{
+    height: 40px;
+    width: 300px;
+    border-radius: 6px;
+    border: 1px solid #b99d61;
+    font-family: 'Roboto', sans-serif !important;
+    padding: 15px;
+    box-shadow: none;
+    outline: none;
+    margin-bottom: 8px;
+}
+.name::placeholder, .price::placeholder,
+.photo::placeholder, .description::placeholder, .additional::placeholder{
+    color: #b99d61;
+}
+.password:focus, .email:focus{
+    outline: 1px solid #d0b97d;
+}
