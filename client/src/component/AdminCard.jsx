@@ -14,7 +14,7 @@ const AdminCard = observer(({food, onDelete}) => {
             </div>
             <div className={classes.post_content} style={{height:'270px !important'}}>
                 <h3>{food.name}</h3>
-                <h5>{"Категория: " + food.category}</h5>
+                <h5>{"Категория: " + food.category.name}</h5>
                 <p>{food.description}</p>
             </div>
             <div className={classes.counter_wrap}>

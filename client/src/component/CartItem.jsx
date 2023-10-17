@@ -4,7 +4,7 @@ import classes from './CartItem.module.css'
 import {observer} from 'mobx-react-lite'
 
 const CartItem = observer(({item, increaseAmount, decreaseAmount, deleteMeal}) => {
-  return (
+    return (
     <div className={classes.cart_box}>
           <img className={classes.cart_img} src={item.food.photo} alt="photo of cart food"></img>
           <div className={classes.name_amount}>

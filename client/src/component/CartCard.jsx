@@ -6,7 +6,6 @@ import {Context} from '../index'
 import {observer} from 'mobx-react-lite'
 import {fetchFood} from "../http/foodAPI";
 import {changeAmount, deleteCartItem, fetchCart} from "../http/cartAPI";
-import {useNavigate} from "react-router-dom";
 
 const CartCard = observer(() => {
     const {cart} = useContext(Context)
@@ -15,7 +14,7 @@ const CartCard = observer(() => {
     useEffect(() => {
         fetchFood().then(data => {
                 food.setFood(data);
-            }, data => {
+            }, () => {
                 food.setFood([])
             }
         )

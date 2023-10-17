@@ -6,9 +6,11 @@ import {observer} from "mobx-react-lite";
 import {Context} from "./index";
 import {useContext, useEffect} from "react";
 import {check} from "./http/userAPI";
+import {fetchCategory} from "./http/categoryAPI";
 
 const App = observer(() => {
     const {user} = useContext(Context)
+    const {category} = useContext(Context)
     // const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -23,12 +25,17 @@ const App = observer(() => {
                 user.setIsAuth(true)
                 user.setIsAdmin(data.role === 'ADMIN')
                 user.setId(data.id)
-            }, data => {
+            }, () => {
                 user.setUser({})
                 user.setIsAuth(false)
                 user.setIsAdmin(false)
                 user.setId({})
             })
+        fetchCategory().then(data => {
+            category.setCategory(data)
+        }, () => {
+            category.setCategory([])
+        })
     }, []);
 
     // if(loading){

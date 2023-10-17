@@ -10,12 +10,14 @@ const MainMealsPage = observer(() => {
   const {food} = useContext(Context)
   const {cart}= useContext(Context)
   const {user}= useContext(Context)
+  const {category} = useContext(Context)
+
   const navigate = useNavigate()
 
   useEffect(() => {
     fetchFood().then(data => {
           food.setFood(data)
-        }, data => {
+        }, () => {
           food.setFood([])
         }
     )
@@ -36,25 +38,21 @@ const MainMealsPage = observer(() => {
     })
   }
 
+  const categId = (category._category_list.filter((item) => item.name === 'Основные блюда'))[0].id
+
   return <div style={{
     overflow: 'auto'
   }}>
-    {food.FoodList.map((food)=>{
-      if (food.category === 'Основные блюда'){
-        return <MealCard 
-        // id_meal={food.id}
-        // title={food.name}
-        // img={food.photo}
-        // price={food.price}
-        // description={food.description}
-        // addit={food.additional}
-        // categ={food.category}
-            key={food.id}
-            food = {food}
-            onAdd={addToCart} />
-      }
+    {
+      food._food_list.map((food) => {
+        if (food.category.id === categId) {
+          return <MealCard
+              key={food.id}
+              food = {food}
+              onAdd={addToCart} />
+        }
+      })
     }
-      )}
   </div>
 })
 

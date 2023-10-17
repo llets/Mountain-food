@@ -1,25 +1,24 @@
-import React, {useState, useContext} from 'react'
+import React, {useState} from 'react'
 import classes from './AuthRegCard.module.css'
 import LoginTab from "./tabs/loginTab";
 import RegTab from "./tabs/regTab";
 import {login, registration} from "../http/userAPI";
 import {observer} from 'mobx-react-lite'
-import {Context} from "../index";
 import {useNavigate} from 'react-router-dom'
 import {AUTH_REG_ROUTE, HOME_ROUTE} from "../utils/consts";
 
 const AuthRegCard = observer(() => {
     const [activeTab, setActiveTab] = useState("logTab");
-    const {user} = useContext(Context)
     const navigate = useNavigate()
 
     const check = async (email, password) => {
         try{
             if (activeTab === "logTab"){
                 await login(email, password);
-                user.setUser(true)
+                alert("Вы успешно вошли в систему.")
             } else {
                 await registration(email, password);
+                alert("Вы успешно зарегистрировались и вошли в систему.")
                 navigate(AUTH_REG_ROUTE)
             }
             navigate(HOME_ROUTE)

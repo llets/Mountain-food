@@ -19,12 +19,18 @@ const CartItem = sequelize.define('cart_item', {
 })
 const Food = sequelize.define('food', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    category: {type: DataTypes.STRING, allowNull: false},
+    // category: {type: DataTypes.STRING, allowNull: false},
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
     photo: {type: DataTypes.STRING, allowNull: false},
     description: {type: DataTypes.STRING},
     price: {type: DataTypes.INTEGER, allowNull: false},
     additional: {type: DataTypes.STRING}
+})
+
+const Category = sequelize.define('category',{
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    name: {type: DataTypes.STRING, unique: true, allowNull: false},
+    type: {type: DataTypes.STRING, allowNull: false},
 })
 
 User.hasOne(Cart)
@@ -36,9 +42,13 @@ CartItem.belongsTo(Cart)
 Food.hasMany(CartItem)
 CartItem.belongsTo(Food)
 
+Category.hasMany(Food)
+Food.belongsTo(Category)
+
 module.exports = {
     User,
     Food,
     Cart,
-    CartItem
+    CartItem,
+    Category
 }

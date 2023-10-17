@@ -1,18 +1,24 @@
-const {Food} = require('../models/models')
+const {Food, Category} = require('../models/models')
 const ApiError = require('../error/ApiError')
 class FoodController {
     async create(req, res, next){
         try {
-            // console.log(req.body)
-            const {category, name, photo, description, price, additional} = req.body.foodData
-            console.log(category, name, photo, description, price, additional)
+            const {category, name, photo, description, price, additional} = req.body
+            const categ = await Category.findOne({where: {name: category}})
             // const {category, name, photo, description, price, additional} = req.body.foodData
             if (!name || !photo || !price) {
                 return next(ApiError.badRequest("Поля \"название\", \"цена\" \"ссылка на фото\" являются обязательными"))
             }
             const food = await Food.create(
-                {category, name, photo, description, price, additional})
-            return res.json(food)
+                {categoryId: categ.id, name, photo, description, price, additional})
+            const foodDetailed = await Food.findOne({
+                where: {id: food.id},
+                include: [{
+                    model: Category,
+                    as: 'category'
+                }]
+            })
+            return res.json(foodDetailed)
         }
         catch(e){
             next(ApiError.badRequest((e.message)))
@@ -20,13 +26,25 @@ class FoodController {
     }
     async get(req, res){
         const {category} = req.query
-        let foods;
         if (!category){
-            foods = await Food.findAll()
+            const foodDetailed = await Food.findAll({
+                include: [{
+                    model: Category,
+                    as: 'category'
+                }]
+            })
+            return res.json(foodDetailed)
         } else{
-            foods = await Food.findAll({where: {category}})
+            const categ = await Category.findOne({where: {name: category}})
+            const foodDetailed = await Food.findAll({
+                where: {categoryId: categ.id},
+                include: [{
+                    model: Category,
+                    as: 'category'
+                }]
+            })
+            return res.json(foodDetailed)
         }
-        return res.json(foods)
     }
     async getOne(req, res){
         const {id} = req.params

@@ -7,15 +7,16 @@ import {observer} from "mobx-react-lite";
 import {createCartItem, fetchCart} from "../http/cartAPI";
 
 const HachapuriPage = observer(() => {
-  const {food} = useContext(Context)
-  const {cart}= useContext(Context)
-  const {user}= useContext(Context)
-  const navigate = useNavigate()
+    const {food} = useContext(Context)
+    const {cart}= useContext(Context)
+    const {user}= useContext(Context)
+    const {category} = useContext(Context)
+    const navigate = useNavigate()
 
   useEffect(() => {
         fetchFood().then(data => {
               food.setFood(data)
-            }, data => {
+            }, () => {
               food.setFood([])
             }
         )
@@ -36,19 +37,31 @@ const HachapuriPage = observer(() => {
       }
     })
   }
+  const categId = (category._category_list.filter((item) => item.name === 'Хачапури'))[0].id
 
   return <div style={{
     overflow: 'auto'
   }}>
-    {food._food_list.map((food)=>{
-        if (food.category === 'Хачапури'){
-          return <MealCard
-              key={food.id}
-              food = {food}
-              onAdd={addToCart} />
+        {
+          food._food_list.map((food) => {
+              if (food.category.id === categId) {
+                  return <MealCard
+                      key={food.id}
+                      food = {food}
+                      onAdd={addToCart} />
+                }
+            })
         }
-    }
-    )}
+
+    {/*{food._food_list.map((food)=>{*/}
+    {/*    if (food.category === 'Хачапури'){*/}
+    {/*      return <MealCard*/}
+    {/*          key={food.id}*/}
+    {/*          food = {food}*/}
+    {/*          onAdd={addToCart} />*/}
+    {/*    }*/}
+    {/*}*/}
+    {/*)}*/}
   </div>
 })
 

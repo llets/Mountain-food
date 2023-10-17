@@ -15,7 +15,6 @@ class CartController{
         const {id} = req.params
         let items;
         const cart = await Cart.findOne({where: {userId: id}})
-
         if (cart == null){
             items =  {}
         } else {
@@ -25,6 +24,7 @@ class CartController{
                 include: [{
                     model: Food,
                     as: 'food',
+                    // required: true
                     // through: {attributes: ['name', 'photo', 'price']}
                 }]
             })

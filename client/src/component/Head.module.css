@@ -95,6 +95,10 @@
     color: #444;
 }
 
+.authreg{
+    height: 50px !important;
+}
+
 .logo{
     display: flex;
     align-items: center;

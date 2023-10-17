@@ -10,12 +10,14 @@ const DrinksPage = observer( () => {
     const {food} = useContext(Context)
     const {cart}= useContext(Context)
     const {user}= useContext(Context)
+    const {category}= useContext(Context)
+
     const navigate = useNavigate()
 
     useEffect(() => {
             fetchFood().then(data => {
                     food.setFood(data)
-                }, data => {
+                }, () => {
                     food.setFood([])
                 }
             )
@@ -37,19 +39,24 @@ const DrinksPage = observer( () => {
         })
     }
 
+    // const categories = category._category_list.filter((item) => item.type === 'Напиток')
+
   return <div style={{
       overflow: 'auto'
   }}>
-      <DrinkCard
-      drinks={food._food_list.filter((food) => food.category === 'Алкогольные')}
-      key={1}
-      category='Алкогольные'
-      onAdd={addToCart}/>
-      <DrinkCard 
-      drinks={food._food_list.filter((food) => food.category === 'Прохладительные')}
-      key={2}
-      category='Прохладительные'
-      onAdd={addToCart}/>
+          {
+              category._category_list.filter((item) => item.type === 'Напиток').map((c) => {
+                      if (c.type === 'Напиток') {
+                          let drinks = food.FoodList.filter((food) => food.category.id === c.id)
+                          return <DrinkCard
+                              drinks={drinks}
+                              key={c.id}
+                              category={c.name}
+                              onAdd={addToCart}/>
+                      }
+                  }
+              )
+          }
   </div>
 })
 
