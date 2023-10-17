@@ -14,13 +14,6 @@ const Foot = () => {
           <LinkedInIcon fontSize="large"/>
           <InstagramIcon fontSize="large"/>
         </div>
-        <div className={classes.menu}>
-            <a className={classes.menu_item} href="#">Home</a>
-            <a className={classes.menu_item} href="#">About</a>
-            <a className={classes.menu_item} href="#">Services</a>
-            <a className={classes.menu_item} href="#">Team</a>
-            <a className={classes.menu_item} href="#">Contact</a>
-        </div>
         <p className={classes.author}>©2023 Mountain Food | All Rights Reserved</p>
     </div>
   )

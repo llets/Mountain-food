@@ -9,12 +9,24 @@ const generateJwt = (id, email, role) => {
         {expiresIn: '24h'})
 }
 
+const checkEmail = (email) => {
+    const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/;
+    return EMAIL_REGEXP.test(email);
+}
+const checkPassword = (password) => {
+    const EMAIL_REGEXP = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&-+=()!? "]).{8,128}$/;
+    return EMAIL_REGEXP.test(password);
+}
+
 class UserController {
     async registration(req, res, next) {
         try {
             const {email, password, role} = req.body
-            if (!email || !password) {
-                return next(ApiError.badRequest("Некорректный email или пароль"))
+            if (!email || !checkEmail(email)) {
+                return next(ApiError.badRequest("Некорректный email"))
+            }
+            if (!password || !checkPassword(password)){
+                return next(ApiError.badRequest("Некорректный пароль"))
             }
             const candidate = await User.findOne({where: {email}})
             if (candidate) {
