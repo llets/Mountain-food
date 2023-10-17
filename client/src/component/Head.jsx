@@ -19,7 +19,7 @@ import {
 const Head = observer(() => {
   const {user} = useContext(Context)
   const logOut = () => {
-    user.setUser({})
+    user.setUser(false)
     user.setIsAdmin(false)
     user.setId({})
     user.setIsAuth(false)

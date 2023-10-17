@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom'
 import {fetchFood} from "../http/foodAPI";
 import {observer} from "mobx-react-lite";
 import {createCartItem, fetchCart} from "../http/cartAPI";
+import {fetchCategory} from "../http/categoryAPI";
 
 const HinkaliPage = observer(() => {
   const {food} = useContext(Context)
@@ -25,6 +26,11 @@ const HinkaliPage = observer(() => {
                     cart.setCart(data)
                 })
             }
+            fetchCategory().then(data => {
+                category.setCategory(data)
+            }, () => {
+                category.setCategory([])
+            })
     }
     , []);
 

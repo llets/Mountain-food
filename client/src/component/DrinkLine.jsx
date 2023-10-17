@@ -1,9 +1,11 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import classes from './DrinkLine.module.css'
 import {observer} from 'mobx-react-lite'
 import {Button} from "react-bootstrap";
+import {Context} from "../index";
 
 const DrinkLine = observer(({drink, onAdd}) => {
+    const {user} = useContext(Context)
   return (
       <div style={{
           display: 'flex'
@@ -13,8 +15,7 @@ const DrinkLine = observer(({drink, onAdd}) => {
               <div className={classes.price}>{drink.price + " ₽"}</div>
           </div>
           <div className={classes.counter_wrap}>
-              <Button id={drink.id}
-                      onClick={()=>onAdd(drink.id)}>+</Button>
+              {user.user && <Button id={drink.id} onClick={()=>onAdd(drink.id)}>+</Button>}
           </div>
       </div>
   )

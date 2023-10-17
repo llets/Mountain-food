@@ -80,7 +80,7 @@ background: #F8CF82;
 .post_content {
 display: flex;
 flex-direction: column;
-height: 195px;
+height: 250px !important;
 padding: 25px;
 margin-bottom: 20px;
 font-family:  'PT Serif', serif;

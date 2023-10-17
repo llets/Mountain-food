@@ -26,21 +26,22 @@ const App = observer(() => {
                 user.setIsAdmin(data.role === 'ADMIN')
                 user.setId(data.id)
             }, () => {
-                user.setUser({})
+                user.setUser(false)
                 user.setIsAuth(false)
                 user.setIsAdmin(false)
                 user.setId({})
             })
-        fetchCategory().then(data => {
-            category.setCategory(data)
-        }, () => {
-            category.setCategory([])
-        })
+            fetchCategory().then(data => {
+                category.setCategory(data)
+            }, () => {
+                category.setCategory([])
+            })
     }, []);
 
     // if(loading){
     //     return <Spinner animation="border" role="status"/>
     // }
+    console.log(user)
   return (
    <>
       <BrowserRouter>

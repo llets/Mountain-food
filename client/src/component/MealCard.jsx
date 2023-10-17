@@ -1,10 +1,12 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Card from 'react-bootstrap/Card';
 import classes from './MealCard.module.css'
 import { Button } from 'react-bootstrap';
 import {observer} from 'mobx-react-lite'
+import {Context} from "../index";
 
 const MealCard = observer(({food, onAdd}) => {
+    const {user} = useContext(Context)
   return (
     <Card className={classes.post}>
       <div className={classes.post_top}>
@@ -24,10 +26,13 @@ const MealCard = observer(({food, onAdd}) => {
         <p>{food.description}</p>
       </div>
       }
-      <div className={classes.counter_wrap}>
-        <Button id={food.id}
-        onClick={()=>onAdd(food.id)}>+</Button>
-      </div>
+        {
+            user.user &&
+            <div className={classes.counter_wrap}>
+                <Button id={food.id}
+                        onClick={()=>onAdd(food.id)}>+</Button>
+            </div>
+        }
     </Card>
   )
 })
