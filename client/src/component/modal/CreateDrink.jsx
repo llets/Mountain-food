@@ -19,7 +19,6 @@ const CreateDrink = ({show, onHide}) => {
         form.append('additional', ``)
         try {
             const foodData = Object.fromEntries(form)
-            console.log(foodData)
             let dat = await createFood(foodData)
             setName('')
             setPrice(400)

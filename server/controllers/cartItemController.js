@@ -85,8 +85,6 @@ class CartItemController{
     async changeAmount(req, res, next){
         try{
             const {id, type} = req.body
-            console.log(id)
-            console.log(type)
             const cartItem = await CartItem.findOne({where: {id: id}})
             const cartItemDetailed = await CartItem.findOne({
                 where: {cartId: cartItem.cartId,
@@ -97,11 +95,8 @@ class CartItemController{
                     // through: {attributes: ['name', 'photo', 'price']}
                 }]
             })
-            console.log(cartItemDetailed)
             const price = cartItemDetailed.food.price
-            console.log(price)
             const cartId = cartItemDetailed.cartId
-            console.log(cartId)
             if (type === "decrease"){
                 if (cartItem.amount === 1){
                     await cartItem.destroy();
