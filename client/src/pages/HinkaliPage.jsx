@@ -24,11 +24,6 @@ const HinkaliPage = observer(() => {
                 food.setFood([])
             }
         )
-            if (user.userId !== 0) {
-                fetchCart(user.userId).then(data => {
-                    cart.setCart(data)
-                })
-            }
             fetchCategory().then(data => {
                 category.setCategory(data)
                 setCategoryId(category.getCategoryId('Хинкали'))
