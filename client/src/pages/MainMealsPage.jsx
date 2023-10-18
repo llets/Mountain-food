@@ -32,8 +32,8 @@ const MainMealsPage = observer(() => {
     }
     fetchCategory().then(data => {
       category.setCategory(data)
+      setCategoryId(category.getCategoryId('Основные блюда'))
     })
-    setCategoryId(category.getCategoryId('Основные блюда'))
   }, []);
 
   const addToCart = (id_food) => {

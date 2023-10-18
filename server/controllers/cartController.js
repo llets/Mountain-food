@@ -24,8 +24,6 @@ class CartController{
                 include: [{
                     model: Food,
                     as: 'food',
-                    // required: true
-                    // through: {attributes: ['name', 'photo', 'price']}
                 }]
             })
         }

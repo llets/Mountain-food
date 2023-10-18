@@ -15,8 +15,6 @@ class CategoryStore {
         return this._category_list
     }
     getCategoryId(name){
-        // const a =
-        // console.log(a[0].id)
         return this._category_list.filter(item => item.name === name)[0].id
     }
 }

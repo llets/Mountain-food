@@ -31,8 +31,8 @@ const HachapuriPage = observer(() => {
       }
           fetchCategory().then(data => {
               category.setCategory(data)
+              setCategoryId(category.getCategoryId('Хачапури'))
           })
-          setCategoryId(category.getCategoryId('Хачапури'))
       }
       , []);
 
