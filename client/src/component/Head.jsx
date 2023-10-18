@@ -21,7 +21,7 @@ const Head = observer(() => {
   const logOut = () => {
     user.setUser(false)
     user.setIsAdmin(false)
-    user.setId({})
+    user.setId(0)
     user.setIsAuth(false)
     localStorage.removeItem('token')
   }

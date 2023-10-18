@@ -1,17 +1,23 @@
 import {makeAutoObservable} from 'mobx'
 
 class CategoryStore {
+
+    _category_list=[
+    ]
     constructor() {
         this._category_list = []
         makeAutoObservable(this)
     }
-    _category_list=[
-    ]
     setCategory(a) {
         this._category_list = a
     }
     get CategoryList() {
         return this._category_list
+    }
+    getCategoryId(name){
+        // const a =
+        // console.log(a[0].id)
+        return this._category_list.filter(item => item.name === name)[0].id
     }
 }
 

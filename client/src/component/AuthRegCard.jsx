@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react'
 import classes from './AuthRegCard.module.css'
 import LoginTab from "./tabs/loginTab";
 import RegTab from "./tabs/regTab";
-import {login, registration} from "../http/userAPI";
+import {check, login, registration} from "../http/userAPI";
 import {observer} from 'mobx-react-lite'
 import {useNavigate} from 'react-router-dom'
 import {HOME_ROUTE} from "../utils/consts";
@@ -13,15 +13,25 @@ const AuthRegCard = observer(() => {
     const navigate = useNavigate()
     const {user} = useContext(Context)
 
-    const check = async (email, password) => {
+    const checkEmailPassword = async (email, password) => {
         try{
             if (activeTab === "logTab"){
                 await login(email, password);
-                user.setIsAuth(true)
+                check().then(data =>{
+                    user.setUser(true)
+                    user.setIsAuth(true)
+                    user.setIsAdmin(data.role === 'ADMIN')
+                    user.setId(data.id)
+                })
                 alert("Вы успешно вошли в систему.")
             } else {
                 await registration(email, password);
-                user.setIsAuth(true)
+                check().then(data =>{
+                    user.setUser(true)
+                    user.setIsAuth(true)
+                    user.setIsAdmin(data.role === 'ADMIN')
+                    user.setId(data.id)
+                })
                 alert("Вы успешно зарегистрировались и вошли в систему.")
             }
             navigate(HOME_ROUTE)
@@ -46,7 +56,7 @@ const AuthRegCard = observer(() => {
               onClick={handleRegTab}>Регистрация</li>
           </ul>
           <div className={classes.outlet}>
-              {activeTab === "logTab" ? <LoginTab clickFunc={check}/> : <RegTab clickFunc={check}/>}
+              {activeTab === "logTab" ? <LoginTab clickFunc={checkEmailPassword}/> : <RegTab clickFunc={checkEmailPassword}/>}
           </div>
       </div>
   )

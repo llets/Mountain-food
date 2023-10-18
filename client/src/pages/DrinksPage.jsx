@@ -22,15 +22,13 @@ const DrinksPage = observer( () => {
                     food.setFood([])
                 }
             )
-            if (!user.userId) {
+            if (user.userId !== 0) {
                 fetchCart(user.userId).then(data => {
                     cart.setCart(data)
                 })
             }
             fetchCategory().then(data => {
                 category.setCategory(data)
-            }, () => {
-                category.setCategory([])
             })
         }
         , []);
@@ -52,14 +50,14 @@ const DrinksPage = observer( () => {
   }}>
           {
               category._category_list.filter((item) => item.type === 'Напиток').map((c) => {
-                      if (c.type === 'Напиток') {
-                          let drinks = food.FoodList.filter((food) => food.category.id === c.id)
+                      // if (c.type === 'Напиток') {
+                          let drinks = food._food_list.filter((food) => food.category.id === c.id)
                           return <DrinkCard
                               drinks={drinks}
                               key={c.id}
                               category={c.name}
                               onAdd={addToCart}/>
-                      }
+                      // }
                   }
               )
           }

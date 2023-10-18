@@ -1,4 +1,4 @@
-const {Food, Category} = require('../models/models')
+const {Food, Category, Cart, CartItem} = require('../models/models')
 const ApiError = require('../error/ApiError')
 class FoodController {
     async create(req, res, next){
@@ -54,11 +54,26 @@ class FoodController {
     async deleteOne(req, res, next){
         const {id} = req.params
         try{
-            await Food.destroy({
-                where: {
-                    id: id
+            const food = await Food.findOne({where: {id}})
+            const cartItems = await CartItem.findAll({where: {foodId: id}})
+            console.log(cartItems)
+            console.log(cartItems.length)
+            if (cartItems.length !== 0) {
+                const price = food.price
+                for (let i = 0; i <cartItems.length; i++) {
+                    const amount = cartItems[i].amount
+                    const cartId = cartItems[i].cartId
+                    // cartItem will be deleted, recount total
+                    const cart = await Cart.findOne({where: {id: cartId}})
+                    cart.total = cart.total - (price * amount)
+                    cart.save()
+                    //
                 }
-            });
+                for (let i = 0; i <cartItems.length; i++){
+                    await cartItems[i].destroy();
+                }
+            }
+            await food.destroy();
             const foods = await Food.findAll()
             return res.json(foods)
         } catch(e){

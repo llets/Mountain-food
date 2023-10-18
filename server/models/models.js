@@ -33,6 +33,11 @@ const Category = sequelize.define('category',{
     type: {type: DataTypes.STRING, allowNull: false},
 })
 
+const StaticPhoto = sequelize.define('staticPhoto', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    name: {type: DataTypes.STRING, unique: true, allowNull: false}
+})
+
 User.hasOne(Cart)
 Cart.belongsTo(User)
 
@@ -50,5 +55,6 @@ module.exports = {
     Food,
     Cart,
     CartItem,
-    Category
+    Category,
+    StaticPhoto
 }

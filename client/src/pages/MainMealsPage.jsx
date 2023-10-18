@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {Context} from '../index'
 import MealCard from '../component/MealCard'
 import {useNavigate} from 'react-router-dom'
@@ -13,6 +13,9 @@ const MainMealsPage = observer(() => {
   const {user}= useContext(Context)
   const {category} = useContext(Context)
 
+
+  const [categoryId, setCategoryId] = useState(0)
+
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -22,15 +25,14 @@ const MainMealsPage = observer(() => {
           food.setFood([])
         }
     )
-    if (!user.userId) {
+    if (user.userId !== 0) {
       fetchCart(user.userId).then(data => {
         cart.setCart(data)
       })
     }
     fetchCategory().then(data => {
       category.setCategory(data)
-    }, () => {
-      category.setCategory([])
+      setCategoryId(category.getCategoryId('Основные блюда'))
     })
   }, []);
 
@@ -44,14 +46,13 @@ const MainMealsPage = observer(() => {
     })
   }
 
-  const categId = (category._category_list.filter((item) => item.name === 'Основные блюда'))[0].id
-
   return <div style={{
     overflow: 'auto'
   }}>
+
     {
       food._food_list.map((food) => {
-        if (food.category.id === categId) {
+        if (food.category.id === categoryId) {
           return <MealCard
               key={food.id}
               food = {food}

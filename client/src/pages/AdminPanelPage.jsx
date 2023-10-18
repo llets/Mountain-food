@@ -11,18 +11,17 @@ import {deleteFood, fetchFood} from "../http/foodAPI";
 
 const AdminPanelPage = observer(() => {
     const {food} = useContext(Context)
+    const {cart} = useContext(Context)
 
     useEffect(() => {
         fetchFood().then(data => {
                 food.setFood(data)
-            }, data => {
-                food.setFood([])
-            }
-        )
+            })
     }, []);
     const deleteMeal = async (id_food) => {
         await deleteFood(id_food)
         food.deleteFood(id_food)
+        cart.deleteCartProductByFood(id_food)
     }
 
     const [HinkaliVisible, setHinkaliVisible] = useState(false)

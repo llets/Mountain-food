@@ -49,6 +49,13 @@ class CartStore{
         this._cart = this._cart.filter(item => item.id !== id)
     }
 
+    deleteCartProductByFood(id){
+        let item = this._cart.filter(item => item.foodId === id)
+        console.log(item)
+        this._total = this._total - (item[0].amount * item[0].food.price)
+        this._cart = this._cart.filter(item => item.foodId !== id)
+    }
+
     get Cart(){
         return this._cart
     }

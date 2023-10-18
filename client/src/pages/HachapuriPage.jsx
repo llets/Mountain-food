@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {Context} from '../index'
 import MealCard from '../component/MealCard'
 import {useNavigate} from 'react-router-dom'
@@ -12,6 +12,9 @@ const HachapuriPage = observer(() => {
     const {cart}= useContext(Context)
     const {user}= useContext(Context)
     const {category} = useContext(Context)
+
+    const [categoryId, setCategoryId] = useState(0)
+
     const navigate = useNavigate()
 
   useEffect(() => {
@@ -21,15 +24,14 @@ const HachapuriPage = observer(() => {
               food.setFood([])
             }
         )
-          if (!user.userId) {
-              fetchCart(user.userId).then(data => {
-                  cart.setCart(data)
-              })
-          }
+          if (user.userId !== 0) {
+          fetchCart(user.userId).then(data => {
+              cart.setCart(data)
+          })
+      }
           fetchCategory().then(data => {
               category.setCategory(data)
-          }, () => {
-              category.setCategory([])
+              setCategoryId(category.getCategoryId('Хачапури'))
           })
       }
       , []);
@@ -43,14 +45,14 @@ const HachapuriPage = observer(() => {
       }
     })
   }
-  const categId = (category._category_list.filter((item) => item.name === 'Хачапури'))[0].id
+  // const categId = (category._category_list.filter((item) => item.name === 'Хачапури'))[0].id
 
   return <div style={{
     overflow: 'auto'
   }}>
         {
           food._food_list.map((food) => {
-              if (food.category.id === categId) {
+              if (food.category.id === categoryId) {
                   return <MealCard
                       key={food.id}
                       food = {food}
