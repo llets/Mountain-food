@@ -1,10 +1,25 @@
-import {React} from 'react'
+import {React, useContext, useEffect, useState} from 'react'
 import classes from './MainInfo.module.css'
 import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
+import {Context} from "../index";
+import {fetchStaticPhotos} from "../http/staticPhotoAPI";
 
 const MainInfo = () => {
 
 const mapState = {  center: [54.7250628841006,55.94095232813801], zoom: 16 };
+    const {staticPhoto} = useContext(Context)
+
+    const [name1, setName1] = useState('')
+    const [name2, setName2] = useState('')
+
+    useEffect(() => {
+        fetchStaticPhotos().then(data => {
+            staticPhoto.setPhotoList(data);
+            setName1(staticPhoto.getPhotoName(1))
+            setName2(staticPhoto.getPhotoName(2))
+            }
+        )
+    }, []);
   return (
     <>
         <div className={classes.contentWrap}>
@@ -14,12 +29,14 @@ const mapState = {  center: [54.7250628841006,55.94095232813801], zoom: 16 };
                     <p className={classes.maintext}> Это душевное заведение расположено недалеко от Ле-Русс — одного из главных горнолыжных курортов горного массива Юра. Сюда приезжают, чтобы насладиться местной, щедрой, идейной, сезонной и экологичной кухней. В меню: юрское фондю с органическим сыром конте, гренки с лесными грибами и желтым вином Юры, улитки, приготовленные с местным абсентом.</p>
                 </div>
                 <div className={classes.shadow_border}>
-                    <img className={classes.shadow_border} src="https://github.com/mininakar/cafe/blob/main/pic/mainphoto.jpg?raw=true"/>
+                    <img className={classes.shadow_border}
+                         src={name1}/>
                 </div>
             </div>
             <div className={classes.menu}>
                 <div className={classes.shadow_border}>
-                    <img className={classes.shadow_border} src="https://github.com/mininakar/cafe/blob/main/pic/kitchen.jpg?raw=true"/>
+                    <img className={classes.shadow_border}
+                         src={name2}/>
                 </div>
                 <div className={classes.text}>
                     <p className={classes.headerfortext}> МЕНЮ</p>

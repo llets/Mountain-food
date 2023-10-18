@@ -6,6 +6,7 @@ import UserStore from './store/userStore';
 import CartStore from './store/cartStore';
 import FoodStore from './store/foodStore';
 import CategoryStore from "./store/categoryStore";
+import StaticPhotoStore from "./store/staticPhotoStore";
 
 export const Context = createContext(null)
 const root = ReactDOM.createRoot(document.getElementById('root'))
@@ -14,7 +15,8 @@ root.render(
     user: new UserStore(),
     cart: new CartStore(),
     food: new FoodStore(),
-    category: new CategoryStore()
+    category: new CategoryStore(),
+    staticPhoto: new StaticPhotoStore()
     }}>
 <App />
 </Context.Provider>

@@ -43,8 +43,6 @@ const DrinksPage = observer( () => {
         })
     }
 
-    // const categories = category._category_list.filter((item) => item.type === 'Напиток')
-
   return <div style={{
       overflow: 'auto'
   }}>

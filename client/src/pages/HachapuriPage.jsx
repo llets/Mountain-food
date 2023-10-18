@@ -31,8 +31,8 @@ const HachapuriPage = observer(() => {
       }
           fetchCategory().then(data => {
               category.setCategory(data)
-              setCategoryId(category.getCategoryId('Хачапури'))
           })
+          setCategoryId(category.getCategoryId('Хачапури'))
       }
       , []);
 
@@ -45,7 +45,6 @@ const HachapuriPage = observer(() => {
       }
     })
   }
-  // const categId = (category._category_list.filter((item) => item.name === 'Хачапури'))[0].id
 
   return <div style={{
     overflow: 'auto'

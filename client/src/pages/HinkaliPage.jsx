@@ -31,8 +31,8 @@ const HinkaliPage = observer(() => {
             }
             fetchCategory().then(data => {
                 category.setCategory(data)
-                setCategoryId(category.getCategoryId('Хинкали'))
             })
+            setCategoryId(category.getCategoryId('Хинкали'))
     }
     , []);
 
